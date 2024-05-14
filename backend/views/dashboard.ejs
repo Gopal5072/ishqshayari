@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<!-- <h1>Dashboard</h1>
+<a href="/addnew">Add new shayari</a>
+<a href="/shayaris">View all shayaris</a> -->
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="text-center mb-20">
+        <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">DashBoard</h1>
+      </div>
+      <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+        <div class="p-2 sm:w-1/2 w-full" onclick="window.location.href = '/addnew'">
+          <div class="bg-gray-100 rounded flex p-4 h-full items-center hover:bg-gray-200 cursor-pointer transition duration-300">
+            <img src="https://www.svgrepo.com/show/495869/add-circle.svg" alt="add" class="mr-4 w-6 h-6 flex-shrink-0">
+            <span class="title-font font-medium">Add New Shayari</span>
+          </div>
+        </div>
+        <div class="p-2 sm:w-1/2 w-full">
+          <div class="bg-gray-100 rounded flex p-4 h-full items-center hover:bg-gray-200 cursor-pointer transition duration-300" onclick="window.location.href = '/shayaris'">
+            <img src="https://www.svgrepo.com/show/513026/view-close-818.svg" alt="view" class="mr-4 w-6 h-6 flex-shrink-0">
+            <span class="title-font font-medium">View All Shayaris</span>
+          </div>
+        </div>
+      </div>
+      <button class="flex mx-auto mt-16 text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg" onclick="handleLogout()">Logout</button>
+    </div>
+  </section>
+  <script>
+    async function handleLogout() {
+        const confirm = window.confirm('Are you sure you want to logout?')
+        if (confirm) {
+            const response = await fetch('/logout')
+            const data = await response.json()
+            if (data.status === 'ok') {
+                alert(data.message)
+                window.location.href = '/login'
+            } else {
+                alert(data.message)
+            }
+        } else return
+    }
+  </script>
+
+<%- include('partials/footer') %>

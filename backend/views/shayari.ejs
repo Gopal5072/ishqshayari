@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<div class="relative isolate pt-14 lg:px-8 min-h-screen w-full bg-[url('<%= shayari.image %>')] bg-cover bg-center">
+    <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+      <div class="mb-8 flex justify-center">
+        <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-white ring-1 ring-gray-100 hover:ring-gray-400 transition duration-300">
+          Edit This Shayari <a href="/shayari/edit/<%= shayari._id %>" class="font-semibold text-blue-600"><span class="absolute inset-0" aria-hidden="true"></span>Here<span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+      <div class="text-center">
+        <p class="text-white font-bold">By <%= shayari.author %></p>
+        <p class="text-white"><%= date %></p>
+        <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl"><%= shayari.title %></h1>
+        <div class="mt-6 text-lg leading-8 text-gray-200 prose whitespace-pre"><%= shayari.content %></div>
+        <div class="mt-10 flex items-center justify-center gap-x-6">
+          <button onclick="handleDelete('<%= shayari._id %>')" class="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-400 focus:outline-none transition duration-300">Delete</button>
+          <a href="/shayaris" class="text-sm font-semibold leading-6 text-white hover:text-gray-200 hover:underline transition duration-300">Back <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+    async function handleDelete(id) {
+        const confirm = window.confirm('Are you sure you want to delete this shayari?')
+        if (confirm) {
+            const response = await fetch('/shayari/' + id, {
+                method: 'DELETE'
+            })
+            const data = await response.json()
+            if (data.status === 'ok') {
+                alert(data.message)
+                window.location.href = '/shayaris'
+            } else {
+                alert(data.message)
+            }
+        } else return
+    }
+</script>
+
+
+<%- include('partials/footer') %>

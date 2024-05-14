@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">All Shayaris</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+            Here are all the shayaris that are available on the website. You can view them by clicking on them.
+        </p>
+      </div>
+      <div class="flex flex-wrap -m-4">
+        <% if (shayaris.length === 0) { %>
+            <h1 class="text-2xl font-medium title-font mb-4 text-gray-900 mx-auto">No Shayaris Available</h1>
+        <% } %>
+        <% shayaris.forEach(shayari => { %>
+            <div class="lg:w-1/3 sm:w-full w-full p-4" key="<%= shayari._id %>">
+                <div class="flex relative h-48 cursor-pointer" onclick="window.location.href = '/shayari/<%= shayari._id %>'">
+                  <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="<%= shayari.image %>">
+                  <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-gray-200 opacity-0 hover:opacity-75 transition duration-300">
+                    <h2 class="tracking-widest text-sm title-font font-medium text-blue-500 mb-1">Shayari</h2>
+                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3"><%= shayari.title.length > 30 ? shayari.title.slice(0, 30) + "..." : shayari.title %></h1>
+                    <a class="leading-relaxed hover:text-blue-600" href="/shayari/<%= shayari._id %>">View</a>
+                  </div>
+                </div>
+              </div>
+        <% }) %>
+      </div>
+      <a href="/dashboard" class="flex w-[100px] mx-auto mt-5 justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus:outline-none transition duration-300">Back</a>
+    </div>
+  </section>
+
+<%- include('partials/footer') %>

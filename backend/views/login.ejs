@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+
+    <!-- <h1>Login to access dashboard</h1>
+    <form onsubmit="handleSubmit(event)">
+        <input type="text" name="username" placeholder="Username...">
+        <input type="password" name="password" placeholder="Password...">
+        <button type="submit">Login</button>
+    </form> -->
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img class="mx-auto h-10 w-auto" src="https://img.logoipsum.com/224.svg" alt="Nice">
+          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Admin Dashboard</h2>
+        </div>
+      
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form class="space-y-6" onsubmit="handleSubmit(event)">
+            <div>
+              <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username : </label>
+              <div class="mt-2">
+                <input name="username" type="text" required class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 transition duration-300">
+              </div>
+            </div>
+      
+            <div>
+              <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+               <div class="mt-2">
+                <input id="password" name="password" type="password" required class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none sm:text-sm sm:leading-6 transition duration-300">
+              </div>
+            </div>
+      
+            <div>
+              <button type="submit" class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus:outline-none transition duration-300">Sign in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    <script>
+        async function handleSubmit(e) {
+            e.preventDefault()
+            const username = e.target.username.value
+            const password = e.target.password.value
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            const data = await response.json()
+            if (data.status === 'ok') {
+                alert(data.message)
+                window.location.href = '/dashboard'
+            } else {
+                alert(data.message)
+            }
+        }
+    </script>
+
+
+    <%- include('partials/footer') %>
