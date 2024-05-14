@@ -8,7 +8,7 @@ export default function App() {
   const [filteredShayaris, setFilteredShayaris] = useState([])
   const fetchShayaris = async () => {
     setLoading(true)
-    const response = await fetch("https://ishqshayariv2-backend.vercel.app/api")
+    const response = await fetch("https://ishqshayari-backend.vercel.app/api")
     const data = await response.json()
     if (data.status === "ok") {
       const formattedShayaris = data.shayaris.map((shayari) => {
