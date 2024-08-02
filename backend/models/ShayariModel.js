@@ -11,7 +11,7 @@ const shayariSchema = new mongoose.Schema({
   },
   author: {
     type: String,
-    default: "Anshhh",
+    default: "Gopal",
   },
   date: {
     type: Date,
